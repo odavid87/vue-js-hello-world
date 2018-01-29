@@ -24,7 +24,7 @@ module.exports = {
       silent: true,
       default_path_prefix: '',
       globals: {
-        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
+        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port) + '#'
       }
     },
 
