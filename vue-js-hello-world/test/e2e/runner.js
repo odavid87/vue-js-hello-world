@@ -1,6 +1,7 @@
 // 1. start the dev server using production config
 process.env.NODE_ENV = 'testing'
 
+const chromedriver = require('chromedriver')
 const webpack = require('webpack')
 const DevServer = require('webpack-dev-server')
 
@@ -18,6 +19,7 @@ devConfigPromise.then(devConfig => {
   return server.listen(port, host)
 })
 .then(() => {
+  chromedriver.start()
   // 2. run the nightwatch test suite against it
   // to run in additional browsers:
   //    1. add an entry in test/e2e/nightwatch.conf.js under "test_settings"
@@ -38,11 +40,13 @@ devConfigPromise.then(devConfig => {
 
   runner.on('exit', function (code) {
     server.close()
+    chromedriver.stop()
     process.exit(code)
   })
 
   runner.on('error', function (err) {
     server.close()
+    chromedriver.stop()
     throw err
   })
 })

@@ -8,7 +8,7 @@ module.exports = {
   custom_assertions_path: ['test/e2e/custom-assertions'],
 
   selenium: {
-    start_process: true,
+    start_process: false,
     server_path: require('selenium-server').path,
     host: '127.0.0.1',
     port: 4444,
@@ -19,9 +19,10 @@ module.exports = {
 
   test_settings: {
     default: {
-      selenium_port: 4444,
+      selenium_port: 9515,
       selenium_host: 'localhost',
       silent: true,
+      default_path_prefix: '',
       globals: {
         devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
       }
@@ -31,7 +32,10 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,
-        acceptSslCerts: true
+        acceptSslCerts: true,
+        chromeOptions: {
+          args: ['--headless']
+        }
       }
     },
 
