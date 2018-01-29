@@ -12,8 +12,9 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/form',
-      component: Form
+      path: '/form/:id?',
+      component: Form,
+      props: true
     }
   ]
 })
